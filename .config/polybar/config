@@ -1,0 +1,382 @@
+
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+weather = #FB4934
+uptime = #FB6C34
+date = #FABD2F
+filesystem = #8EC07C
+cpu = #D367aB
+memory = #83A5A8
+;background = ${xrdb:color0:#c5052005}
+background = #c5052005
+background-alt = #2c3148
+;; GROOVE IS #343434
+; 3500ff00
+;foreground = ${xrdb:color7:#c5052005}
+foreground = #dfd
+foreground-alt = #777777
+;; GROOVE IS #66eee29a
+;#252
+primary = #ffb52a
+secondary = #e60053
+alert = #bd2c40
+[bar/arc]
+wm-restack = bspwm
+width = 90%
+offset-x = 5%
+offset-y = 1%
+height = 30
+radius = 14
+fixed-center = true
+;radius = 6
+foreground-alt = #f00
+background = #10121b
+foreground = #eeeeee
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Fira Mono :pixelsize=12:weight=bold;1
+font-1 = Fira Mono :pixelsize=12:weight=bold;1
+font-2 = Font Awesome 5 Brands:pixelsize=11;1
+font-3 = Font Awesome 5 Free Solid:pixelsize=11:weight=bold;1
+font-4 =  DejaVuSansMono Nerd Font Mono:pixelsize=12:weight=bold;1
+modules-left =bspwm
+modules-center =  
+modules-right = showcase weather uptime date filesystem memory cpu kill
+; center mpd menu-apps right powermenu pulseaudio
+; tray-position = left
+tray-padding = 2
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+[bar/gray]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 25
+;offset-x = 1%
+;offset-y = 1%
+radius = 0 
+;radius = 6
+fixed-center = false
+foreground-alt = #f00
+background = #202020
+foreground = #eedd9a
+line-size = 3
+line-color = #f00
+border-size = 0
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = DejaVu Sans Mono:pixelsize=11:weight=bold;1
+font-1 = DejaVu Sans Mono:pixelsize=11:weight=bold;1
+font-2 = Font Awesome 5 Brands:pixelsize=12;1
+font-3 = Font Awesome 5 Free Solid:pixelsize=11:weight=bold;1
+font-4 =  DejaVuSansMono Nerd Font Mono:pixelsize=15:weight=bold;1
+modules-left =bspwm
+modules-center =  
+modules-right = weather uptime date filesystem memory cpu kill
+; center mpd menu-apps right powermenu pulseaudio
+; tray-position = left
+tray-padding = 2
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+[bar/test]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 31
+;offset-x = 1%
+;offset-y = 1%
+radius = 0 
+;radius = 6
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+border-size = 0
+border-color = ${colors.background}
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Font Awesome 5 Free Solid:pixelsize=12;1
+font-1 = Font Awesome 5 Free Solid:fontformat=truetype:size=10:antialias=false;0
+font-2 = Font Awesome 5 Free Solid:pixelsize=12;1
+font-3 = Font Awesome 5 Free Solid:pixelsize=12;1
+modules-left = bspwm my-text-label
+modules-center =  
+modules-right = uptime date filesystem pulseaudio xkeyboard memory cpu network tray kill
+; center mpd menu-apps right powermenu pulseaudio
+; tray-position = left
+tray-padding = 2
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+;;[module/xkeyboard]
+;;type = internal/xkeyboard
+;;blacklist-0 = num lock
+
+; format-prefix = " "
+;;format-prefix-foreground = %{F#83A598}
+;;format-prefix-underline = ${colors.secondary}
+
+;;label-layout = %{F#938598}
+;;label-layout-underline = ${colors.secondary}
+
+;;label-indicator-padding = 0;;2
+;;label-indicator-margin = 1
+;;label-indicator-background = ${colors.secondary}
+;;label-indicator-underline = ${colors.secondary}
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+;icon-prev = 
+;icon-stop = 
+;icon-play = 
+;icon-pause = 
+;icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+[module/filesystem]
+type = internal/fs
+label-mounted-foreground = ${colors.filesystem}
+interval = 25
+
+mount-0 = /
+
+label-mounted =  %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %icon%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.memory}
+label-focused-padding = 2;2
+fuzzy-match = true
+label-occupied = %icon%
+label-occupied-padding = 2;2
+ws-icon-0 = 0;
+ws-icon-1 = 1;
+ws-icon-2 = 2;
+ws-icon-3 = "3;"
+ws-icon-4 = "4;5"
+ws-icon-5 = "5;6"
+ws-icon-6 = "6;7"
+ws-icon-7 = "7;8"
+ws-icon-8 = "8;"
+ws-icon-9 = "9;0"
+ws-icon-default = oh no 
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
+;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+; Default: <label-state>
+format = <label-state> <label-mode>
+label-urgent = %icib%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2;2
+
+label-empty = %icon%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2;2
+
+; Separator in between workspaces
+; label-separator = |
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix =      
+format-foreground =${colors.cpu}
+;;format-underline = #f90000
+label =  %percentage:2%%
+[module/memory]
+type = internal/memory
+interval = 2
+format-foreground =${colors.memory}
+format-prefix =    
+;; format-prefix-foreground = ${colors.foreground-alt}
+;;format-underline = #ffaf08
+label = %percentage_used:2%%
+[module/network]
+type = internal/network
+format-connected =%{F#F3679B} <label-connected>
+; Name of the network interface to display. You can get the names of the
+; interfaces on your machine with `ip link`
+; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
+interface = wlp2s0
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3.0
+label-connected = %essid%
+; Test connectivity every Nth update
+; A value of 0 disables the feature
+; NOTE: Experimental (needs more testing)
+; Default: 0
+;ping-interval = 3
+
+; @deprecated: Define min width using token specifiers (%downspeed:min% and %upspeed:min%)
+; Minimum output width of upload/download rate
+; Default: 3
+udspeed-minwidth = 5
+
+; Accumulate values from all interfaces
+; when querying for up/downspeed rate
+; Default: false
+accumulate-stats = true
+
+; Consider an `UNKNOWN` interface state as up.
+; Some devices like USB network adapters have 
+; an unknown state, even when they're running
+; Default: false
+unknown-as-up = true
+
+[module/date]
+type = internal/date
+format-foreground = ${colors.date}
+interval = 5
+date =%A, %B %d, 
+date-alt = " %Y-%m-%d"
+
+time =%H:%M
+time-alt = %H:%M:%S
+
+; format-prefix = 
+;format-prefix-foreground = ${colors.foreground-alt}
+;format-underline = #0a6cf5
+
+label = %date% %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Volume label
+label-volume            =   %percentage%%
+label-volume-foreground = #83B598
+label-volume-padding    = 0
+
+; Muted label
+label-muted            =  Muted
+label-muted-background = #f00
+label-muted-foreground = ${colors.foreground}
+label-muted-padding    = 2
+[module/kill]
+type = custom/text
+content = 
+content-foreground = #e00
+click-left = killall polybar
+[module/uptime]
+content = cum
+type = custom/script
+format = %{T2}<label>
+format-foreground = ${colors.uptime}
+exec = uptime -p
+interval = 60
+[module/weather]
+type = custom/script
+format-foreground = ${colors.weather}
+exec = curl -s http://wttr.in/Waukegan?format=1 | sed -e s/☀️//g  -e s/☁️//g
+click-left = xdg-open http://wttr.in/waukegan
+interval = 60
+[module/ubuntu]
+type = custom/text
+content = 
+content-padding = 2;2
+[module/showcase]
+type = custom/text
+content = hello XD
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+; vim:ft=dosinii
