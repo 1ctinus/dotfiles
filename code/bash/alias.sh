@@ -1,4 +1,5 @@
 alias ll='ls -alF'
+alias pacman="sudo pacman"
 alias please="sudo"
 alias la='ls -A'
 alias l='ls -CF'
