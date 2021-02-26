@@ -1,21 +1,34 @@
-alias pacman="sudo pacman"
-
-# ~/.bashrc
-#
+#!/bin/bash
+###############################
+# _      _   _
+#/ | ___| |_(_)_ __  _   _ ___
+#| |/ __| __| | '_ \| | | / __|
+#| | (__| |_| | | | | |_| \__ \
+#|_|\___|\__|_|_| |_|\__,_|___/
+###############################
+# 1ctinus dotfiles
+# 2020-2021
+###############################
+#  other files                #
+###############################
 source /home/james/code/bash/art.sh
 source /home/james/code/bash/list.sh
 source /home/james/code/bash/readme.sh
 source /home/james/code/bash/haiku.sh
 source /home/james/code/bash/flat.sh
 source /home/james/code/bash/jazz.sh
-source 'code/bash/alias.sh'
+source /home/james/code/bash/alias.sh
+###############################
+# Sets manpager to neovim     #
+###############################
 export MANPAGER="nvim -c 'set ft=man' -"
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-alias ls='ls --color=auto'
-#PS1='[\u@\h \W]\$ '
-PS1="\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+###############################
+# Prompt                      #
+###############################
+PS1="\[\e[31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+##############################
+# Commands                   #
+##############################
 function reddit {
 if [  -z $1 ];
 then
@@ -44,9 +57,6 @@ while :; do
 function rndo {
 return $(printf "%7d" $RANDOM)
 }
-function randcol {
-sed -i -- "s/#ffffff/$(rndo)/g" "/home/$USER/.themes/gkjlgsld/yuh!!/gtk-3.0/gtk.css"
-}
 function lehack {
 while :; do
 #sleep 0.2
@@ -67,6 +77,7 @@ while :; do
 done
 
 }
+# TODO: ADD -H to curl and make jq -r
 function subsize {
 size=$(curl -s https://api.reddit.com/r/"$1" | jq '.data.children[0].data.subreddit_subscribers')
 printf "$size\n"
@@ -74,38 +85,9 @@ printf "$size\n"
 function wurtz {
     mpv https://billwurtz.com/"$1".mp3
 }
-#function ? {
-#printf "1ct: print 1ct logo
-#grso: find repository file size
-#red: red test
-#ipsa: add source to 1ct pack
-#art: shitty art
-#?: prints this message
-#reddit: find reddit subreddits
-#todo: add stuff todo list
-#"
-#}
 function cpp {
 g++ -o "code/cpp/out/$2.out" "code/cpp/$1.cpp"
 ./code/cpp/out/"$2"
-}
-function 1ct {
-printf "\n"
-printf "          ${BLU}            ${NLL}          \n"
-printf "        ${GRE}  ${CYN}          ${BLU}  ${NLL}          \n"
-printf "      ${RED}  ${YEL}          ${CYN}  ${BLU}  ${NLL}          \n"
-printf "      ${RED}          ${YEL}  ${CYN}  ${BLU}  ${NLL}          \n"
-for i in {1..6}; do printf "              ${RED}  ${YEL}  ${CYN}  ${BLU}  ${NLL}          \n";done
-printf "          ${BLU}    ${MAG}  ${WHI}  ${CYN}  ${BLU}      ${NLL}      \n"
-printf "        ${GRE}  ${CYN}    ${WHI}    ${CYN}      ${BLU}  ${NLL}      \n"
-printf "      ${RED}  ${YEL}              ${GRE}  ${NLL}        \n"
-printf "      ${RED}                ${NLL}          \n"
-}
-function hacked {
-    while :; do
-        printf "this desktop has been hacked by Pacc/n"
-        sleep 1
-    done
 }
 #ictinus pack source adder
 function ipsa {
@@ -129,26 +111,7 @@ printf "$(( fuck/1000 ))MB\n"
 function aa {
 echo "alias $1=\"$2\"" >> ~/code/bash/alias.sh
 }
-# some more ls aliases
-# alias ll='ls -alF'
-# alias please="sudo"
-#alias la='ls -A'
-# alias l='ls -CF'
-# alias self="code .bashrc"
-# alias pack="code code/1ct-pack"
-# alias home="cd ~"
-# alias getme="sudo apt install"
-# alias school="setsid firefox -p Skool"
-# alias vim="nvim"
-# alias mp4="mpv --no-config --vo=tct $1"
-# alias s="sudo"
-# alias c="clear"
-# alias http="python3 -m http.server 5000"
-# alias dirsize="du -sh ./"
-# alias shr'=export PS1="\[${nll}${RED}\]\[${whi}\]\u@\h\[${red}$(tput setab 166)\]\[${whi}\] \[$(tput setaf 166)\]\$(parse_git_branch)\$(ps1dir)\[${GRE}\]\[${whi}\] \$\[${gre}${NLL}\]\[${whi}\033[00m\] ";'
-function og {
-printf "${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$"
-}
+# Add -H for curl
 function btc {
     x= curl -s https://api.coindesk.com/v1/bpi/currentprice.json | jq '.bpi.USD.rate' | sed -e s/\"//g
     printf "$x"
@@ -162,14 +125,6 @@ printf "\ncnoreabbrev $1 e $2" >> ~/.config/nvim/init.vim
 function def {
 xdg-open https://en.wiktionary.org/wiki/"$1"
 }
-function mox {
-    yuh=(`echo "$1" | grep -o .`)
-    for (( i=0; i<${#yuh[@]}; i=i+2 )); do
-    s='s'
-    yuh[$i]=echo ${s^^}
-done
-echo "${yuh[@]}"
-}
 function chkfile {
 FILE=$1     
 if [ -f $FILE ]; then
@@ -178,4 +133,3 @@ else
    echo "File $FILE does not exist."
 fi
 }
-# source /home/james/code/bash/ps1.sh
