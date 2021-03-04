@@ -2,6 +2,7 @@ alias ll='ls -alF'
 alias pacman="sudo pacman"
 alias please="sudo"
 alias la='ls -A'
+alias ls='ls --color=auto'
 alias l='ls -CF'
 alias self="code .bashrc"
 alias pack="cd .vscode/extensions/1ct-pack"
@@ -22,3 +23,5 @@ alias sud="sudo"
 alias pacman="sudo pacman"
 alias img="kitty +kitten icat"
 alias update="sudo -p \"pass? \" pacman -Syu | lolcat"
+alias grep="grep --color=auto"
+alias rm="rm -i"
