@@ -6,9 +6,13 @@
 !.gitignore
 !code
 !Pictures
+!.xmonad
+!.xmonad/xmonad.hs
 !.config/rofi
 !.config/dunst
 !.config/picom
+!.config/sxhkd
+!.config/sxhkdrc
 !.config/picom/picom.conf
 !.config/dunst/dunstrc
 !.config/rofi/launchers
