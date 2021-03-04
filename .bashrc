@@ -11,12 +11,10 @@
 ###############################
 #  other files                #
 ###############################
-source /home/james/code/bash/art.sh
 source /home/james/code/bash/list.sh
 source /home/james/code/bash/readme.sh
 source /home/james/code/bash/haiku.sh
 source /home/james/code/bash/flat.sh
-source /home/james/code/bash/jazz.sh
 source /home/james/code/bash/alias.sh
 ###############################
 # Sets manpager to neovim     #
@@ -132,4 +130,18 @@ if [ -f $FILE ]; then
 else
    echo "File $FILE does not exist."
 fi
+}
+function jazz {
+while :; do
+  mpv "https://billwurtz.com/$(shuf -n 1 ~/code/bash/jazz.txt).mp3"
+done
+}
+
+function loop {
+while :; do
+song="$(shuf -n 1 ~/code/bash/wurtz.txt)"
+clear >$(tty)
+echo -e "$song\n"
+  mpv "https://billwurtz.com/${song}.mp3"
+done
 }
