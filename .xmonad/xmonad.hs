@@ -7,10 +7,14 @@
 -- Normally, you'd only override those defaults you care about.
 --
 import XMonad
+import XMonad.Hooks.DynamicLog
 import Data.Monoid
 import System.Exit
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Spacing
+import XMonad.Layout.NoBorders
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
@@ -29,7 +33,7 @@ myClickJustFocuses = False
 
 -- Width of the window border in pixels.
 --
-myBorderWidth   = 0
+myBorderWidth   = 2
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -51,8 +55,8 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#00ff00"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "#777788"
+myFocusedBorderColor = "#ddddee"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -64,9 +68,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch dmenu
     , ((modm,               xK_p     ), spawn "dmenu_run")
-    , ((modm,               xK_y     ), kill)
+    , ((modm,               xK_w     ), kill)
     , ((modm,		    xK_d     ), spawn "rofi -show drun -theme /home/james/.config/rofi/launchers/misc/row_dock.rasi")
-    , ((modm,		    xK_x     ), spawn "nemo")
+    , ((modm,		    xK_e     ), spawn "nemo")
+    , ((modm,               xK_y     ) , sequence_ [spawn "~/code/bash/corner.sh" ,sendMessage $ Toggle NOBORDERS])
+    , ((modm,               xK_i     ), sendMessage $ Toggle NOBORDERS)
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
     , ((modm, 		    xK_a     ), spawn "flameshot gui")
@@ -95,8 +101,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
     -- Swap the focused window and the master window
-    , ((modm,               xK_Return), windows W.swapMaster)
-
+    --, ((modm,               xK_Return), windows W.swapMaster)
+    , ((modm,                 xK_Return), spawn $ XMonad.terminal conf)
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
 
@@ -148,10 +154,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
-
+     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+       | (key, sc) <- zip [] [0..]
+      , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+    ]
+    
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -183,7 +190,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout  = spacingRaw True (Border 0 10 10 10) True (Border 10 10 10 10) True $ avoidStruts( tiled ||| Mirror tiled ||| Full)
+myLayout  = spacingRaw False (Border 10 0 10 0) True (Border 0 10 0 10) True $ mkToggle (NOBORDERS ?? FULL ?? EOT) $ avoidStruts( tiled ||| Mirror tiled ||| Full)
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -252,7 +259,9 @@ myStartupHook = return ()
 
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = xmonad $ docks defaults
+main = xmonad =<< xmobar myConfig
+-- docks defaults
+myConfig = docks defaults { logHook = dynamicLog }
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -276,7 +285,7 @@ defaults = def {
         mouseBindings      = myMouseBindings,
 
       -- hooks, layouts
-        layoutHook         = myLayout,
+        layoutHook         = myLayout, 
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook,
