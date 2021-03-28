@@ -1,0 +1,60 @@
+--------------------------------------------------------------------------------
+--                       _                 __                     _           
+-- __  ___ __ ___   ___ | |__   __ _ _ __ / /_  ___ __ ___   ___ | |__   __ _ 
+-- \ \/ / '_ ` _ \ / _ \| '_ \ / _` | '__/ /\ \/ / '_ ` _ \ / _ \| '_ \ / _` |
+--  >  <| | | | | | (_) | |_) | (_| | | / /  >  <| | | | | | (_) | |_) | (_| |
+-- /_/\_\_| |_| |_|\___/|_.__/ \__,_|_|/_/  /_/\_\_| |_| |_|\___/|_.__/ \__,_|
+--                                                                            
+--                
+--  _ __ _ __ ___ 
+-- | '__| '__/ __|
+-- | |  | | | (__ 
+-- |_|  |_|  \___|
+--                
+--------------------------------------------------------------------------------
+--  _      _   _                 
+-- / | ___| |_(_)_ __  _   _ ___ 
+-- | |/ __| __| | '_ \| | | / __|
+-- | | (__| |_| | | | | |_| \__ \
+-- |_|\___|\__|_|_| |_|\__,_|___/
+--                               
+---------------------------------------------------------------------------------- http://projects.haskell.org/xmobar/
+-- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
+-- you can find weather location codes here: http://weather.noaa.gov/index.html
+
+Config { font    = "xft:FiraMono Nerd Font:weight=bold:pixelsize=14:antialias=true:hinting=true"
+       , additionalFonts = [ "xft:DejaVuSansMono Nerd Font:pixelsize=14:antialias=true:hinting=true"
+                           , "xft:FontAwesome:pixelsize=14"
+                           ]
+       , bgColor = "#10121b"
+       , fgColor = "#ff6c6b"
+       , position = Static { xpos = 12 , ypos = 12, width = 1896, height = 32 }
+       , lowerOnStart = True
+       , hideOnStart = False
+       , allDesktops = True
+       , persistent = True
+       , iconRoot = "/usr/share/pixmaps"  -- default: "."
+       , commands = [
+                      -- Time and date
+                      Run Date "%b %d %Y %H:%M " "date" 50
+                      -- Network up and down
+                    , Run Com "uptime" ["-p"] "" 3600
+                      -- Cpu usage in percent
+                    , Run Cpu ["-t", "<fn=1>\xf108 </fn> (<total>%)","-H","50","--high","red"] 20
+                      -- Ram used number and percent
+                    , Run Memory ["-t", "<fn=1>\xf233 </fn> <used>M (<usedratio>%)"] 20
+                      -- Disk space free
+                    , Run DiskU [("/", "<fn=1>\xf0c7 </fn> <free> free")] [] 60
+                      -- Runs custom script to check for pacman updates.
+                      -- This script is in my dotfiles repo in .local/bin.
+                    , Run Com "/home/james/code/bash/weather.sh" [] "weather" 6000
+                      -- Runs a standard shell command 'uname -r' to get kernel version
+                    , Run Com "uname" ["-r"] "" 3600
+                      -- Prints out the left side items such as workspaces, layout, etc.
+                      -- The workspaces are 'clickable' in my configs.
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " <action=`kitty`><icon=haskell_20.xpm/>  </action>%StdinReader% }{ <fc=#FB4934> %weather% </fc><fc=#FB6C34> %uptime% </fc> <icon=foo.xpm/><fc=#FABD2F> %date% </fc><fc=#8EC07C> %disku% </fc><fc=#83A5A8> %memory% </fc><fc=#D367aB> %cpu%  </fc>"
+       }

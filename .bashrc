@@ -23,7 +23,7 @@ export MANPAGER="nvim -c 'set ft=man' -"
 ###############################
 # Prompt                      #
 ###############################
-PS1="\[\e[31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
+PS1="\[\e[31m\]\u@\h\[\033[00m\]\[\033[01;34m\]\w\[\033[00m\]\$ "
 ##############################
 # Commands                   #
 ##############################
@@ -87,6 +87,8 @@ function cpp {
 g++ -o "code/cpp/out/$2.out" "code/cpp/$1.cpp"
 ./code/cpp/out/"$2"
 }
+# for xterm cursor
+if [[ $(printf $(ps -p $(ps -p $$ -o ppid=) o args=)) == "xterm" ]]; then echo -e -n "\x1b[\x35 q"; fi
 #ictinus pack source adder
 function ipsa {
 sed -i "36i \"$1\": {\n\"iconPath\": \"./../images/$1.png\"\n}," "/home/$USER/.vscode/extensions/1ct-pack/fileicons/1ct-icon-theme.json"
@@ -140,7 +142,7 @@ done
 function loop {
 while :; do
 song="$(shuf -n 1 ~/code/bash/wurtz.txt)"
-clear >$(tty)
+clear
 echo -e "$song\n"
   mpv "https://billwurtz.com/${song}.mp3"
 done

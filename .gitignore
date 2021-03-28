@@ -10,6 +10,8 @@
 !.xmonad/xmonad.hs
 !.config/rofi
 !.config/dunst
+!.config/xmobar
+!.config/xmobar/xmobarrc
 !.config/picom
 !.config/sxhkd
 !.config/sxhkdrc
@@ -37,3 +39,4 @@
 !Pictures/mountain.svg
 !Pictures/pencil.svg
 !Pictures/rip.png
+!.config/awesome.tar.gz

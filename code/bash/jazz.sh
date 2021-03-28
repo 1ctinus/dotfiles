@@ -7,7 +7,7 @@ done
 function loop {
 while :; do
 song="$(shuf -n 1 ~/code/bash/wurtz.txt)"
-clear >$(tty)
+clear
 echo -e "$song\n"
   mpv "https://billwurtz.com/${song}.mp3"
 done

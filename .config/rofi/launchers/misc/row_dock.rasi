@@ -9,7 +9,7 @@
  */
 
 configuration {
-	font:							"Noto Sans 10";
+	font:							"Fira Mono 10";
     show-icons:                     true;
 	icon-theme: 					"Papirus";
     display-drun: 					"";
@@ -28,9 +28,9 @@ configuration {
     background-bar:                 #10121bFF;
     /*151515ff*/
     foreground:                     #EDEDEDFF;
-    accent:			            	#EDEDED4d;
-    border:		               		#1A73E9FF;
-    selected:               		#10121bff;
+    accent:			            	#ba362ecf;
+    border:		               		#ba362eFF;
+    selected:               		#ba362e6f;
     /*#151515*/
 }
 
@@ -50,13 +50,13 @@ window {
 prompt {
     enabled: 						true;
 	padding: 						0.25% 0.75% 0% -0.25%;
-	background-color: 				@background-alt;
+	background-color: 				#ba362e6f;
 	text-color: 					@foreground;
 	font:							"FantasqueSansMono Nerd Font 12";
 }
 
 entry {
-    background-color:               @background-alt;
+    background-color:               #00000000;
     text-color:                     @foreground;
     placeholder-color:              @foreground;
     expand:                         true;
@@ -68,7 +68,7 @@ entry {
 
 inputbar {
 	children: 						[ entry ];
-    background-color:               @background-bar;
+    background-color:               @selected;
     text-color:                     @foreground;
     expand:                         false;
 	border:							0% 0% 0.3% 0%;
