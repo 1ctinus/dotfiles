@@ -2,7 +2,7 @@
 function list {
 case $1 in
 add | a)
-echo $2>> ~/.config/list/"$3".txt
+echo "$2">> ~/.config/list/"$3".txt
 ;;
 rem | remove | del | rm)
 sed -i "$2d" ~/.config/list/"$3".txt
@@ -11,7 +11,7 @@ sed -i "$2d" ~/.config/list/"$3".txt
 cat -n ~/.config/list/"$2".txt
 ;;
 list )
-ls ~/.config/list | sed -e 's/.txt//g'
+find ~/.config/list -maxdepth 1 | sed -e 's/.txt//g'
 ;;
 all )
 shopt -s dotglob && cat -n ~/.config/list/*

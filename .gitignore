@@ -2,6 +2,7 @@
 !.README.md
 !.vimrc
 !.bashrc
+!.zshrc
 !.config
 !.gitignore
 !code
@@ -28,8 +29,8 @@
 !.config/gtk-3.0
 !.config/gtk-3.0/settings.ini
 !.config/rofi/launchers/misc/row_dock.rasi
-!code/bash
-!code/bash/**
+!code/scripts
+!code/scripts/**
 !.config/nvim
 !.config/nvim/init.vim
 !Pictures/pray.png
@@ -40,3 +41,4 @@
 !Pictures/pencil.svg
 !Pictures/rip.png
 !.config/awesome.tar.gz
+code/scripts/img.sh
