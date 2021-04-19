@@ -350,7 +350,7 @@
     frame_color = "#aaaaaa"
 
 [urgency_normal]
-    background = "#10121b"
+    background = "#2e3440"
     foreground = "#DDDDDD"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable

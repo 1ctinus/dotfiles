@@ -26,9 +26,10 @@ Config { font    = "xft:FiraMono Nerd Font:weight=bold:pixelsize=14:antialias=tr
        , additionalFonts = [ "xft:DejaVuSansMono Nerd Font:pixelsize=14:antialias=true:hinting=true"
                            , "xft:FontAwesome:pixelsize=14"
                            ]
-       , bgColor = "#10121b"
+
+       , bgColor = "#acb4bf"
        , fgColor = "#ff6c6b"
-       , position = Static { xpos = 12 , ypos = 12, width = 1896, height = 32 }
+       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 30 }
        , lowerOnStart = True
        , hideOnStart = False
        , allDesktops = True
@@ -56,5 +57,5 @@ Config { font    = "xft:FiraMono Nerd Font:weight=bold:pixelsize=14:antialias=tr
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <action=`kitty`><icon=haskell_20.xpm/>  </action>%StdinReader% }{ <fc=#FB4934> %weather% </fc><fc=#FB6C34> %uptime% </fc> <icon=foo.xpm/><fc=#FABD2F> %date% </fc><fc=#8EC07C> %disku% </fc><fc=#83A5A8> %memory% </fc><fc=#D367aB> %cpu%  </fc>"
+       , template = " <action=`kitty`><icon=haskell_20.xpm/>  </action>%StdinReader% }{ <fc=#FB4934> %weather% </fc><fc=#0B6C34,#000000> %uptime% </fc> <icon=foo.xpm/><fc=#FABD2F> %date% </fc><fc=#8EC07C> %disku% </fc><fc=#83A5A8> %memory% </fc><fc=#D367aB> %cpu%  </fc>"
        }

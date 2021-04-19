@@ -65,9 +65,9 @@ myWorkspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor = "#10121b"
+myNormalBorderColor = "#2e3440"
 
-myFocusedBorderColor = "#bbbbee"
+myFocusedBorderColor = "#eceff4"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -268,7 +268,7 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  xmproc0 <- spawnPipe "xmobar  $HOME/.config/xmobar/xmobarrc"
+  xmproc0 <- spawnPipe "xmobar  -A 0 $HOME/.config/xmobar/xmobarrc"
   xmonad $
     docks
       def

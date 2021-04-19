@@ -16,6 +16,8 @@ source /home/james/code/scripts/readme.sh
 source /home/james/code/scripts/haiku.sh
 source /home/james/code/scripts/flat.sh
 source /home/james/code/scripts/alias.sh
+
+
 ###############################
 # Sets manpager to neovim     #
 ###############################
@@ -23,14 +25,32 @@ export MANPAGER="nvim -c 'set ft=man' -"
 ###############################
 # Prompt                      #
 ##############################
-PS1="%F{red}%n@%m%F{4}%F{#818bec}%~%F{null}$ "
+PS1="%F{red}%n@%m%F{4}%F{#818bec}%~%F{null}%% "
+export PATH=/home/james/.local/bin:$PATH
 ##############################
 # Commands                   #
 ##############################
-plugins=(zsh-autosuggestions zsh-syntax-highlighting)
+# zsh-syntax-highlighting zsh-autosuggestions
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.oh-my-zsh/plugins/command-not-found/command-not-found.plugin.zsh
+
+
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+### Fix slowness of pastes
+
+#source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929293,bold,underline"
-export ZSH=$HOME/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+#export ZSH=$HOME/.oh-my-zsh
+#source $ZSH/oh-my-zsh.sh
 
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
@@ -93,7 +113,7 @@ size=$(curl -s https://api.reddit.com/r/"$1" | jq '.data.children[0].data.subred
 printf "$size\n"
 }
 function wurtz {
-    mpv https://billwurtz.com/"$1".mp3
+    mpv --vo=tct https://billwurtz.com/"$1".mp3
 }
 function cpp {
 g++ -o "code/cpp/out/$2.out" "code/cpp/$1.cpp"
@@ -160,3 +180,21 @@ echo -e "$song\n"
   mpv "https://billwurtz.com/${song}.mp3"
 done
 }
+if [[ -n ${terminfo[smkx]} ]] && [[ -n ${terminfo[rmkx]} ]]; then
+        function zle-line-init () {echoti smkx}
+        function zle-line-finish () {echoti rmkx}
+
+        zle -N zle-line-init
+        zle -N zle-line-finish
+fi
+ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 }
+bindkey '\xffe4' autosuggest-accept
+#echo "zsh on $TERM: $(cat ~/code/scripts/splash.txt | shuf -n 1)"
+#printf "$(/usr/bin/pacman -Qu) updates available\n"
+#printf '=%.s' {1..$(tput cols)}
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
