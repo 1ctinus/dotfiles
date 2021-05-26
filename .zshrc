@@ -164,9 +164,7 @@ function aa {
 echo "alias $1=\"$2\"" >> ~/code/scripts/alias.sh
 }
 # Add -H for curl
-function btc {
-curl -s https://api.coindesk.com/v1/bpi/currentprice.json | jq '.bpi.USD.rate' | sed -e 's/"//g'
-}
+
 function search {
 grep -rnw './' -e "$1" --exclude-dir=node_modules --exclude-dir=.git
 }

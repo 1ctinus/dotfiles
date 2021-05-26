@@ -15,6 +15,7 @@ alias webcam="ffplay -hide_banner -loglevel error -input_format mjpeg -video_siz
 # DO: MAKE AS FUNCTION alias mp4="mpv --no-config --vo=tct \$1"
 alias s="sudo"
 alias c="clear"
+alias btc="curl -s https://api.coindesk.com/v1/bpi/currentprice.json | jq  -r '.bpi.USD.rate'"
 #alias ranger="setsid kitty -e ranger"
 alias http="python3 -m http.server 5000"
 alias ud="rsync -ruLv  ~/code/node-site/data james@\"\$(cat /priv/vps.txt)\":~/node-site --delete"
