@@ -21,12 +21,19 @@ source /home/james/code/scripts/alias.sh
 ###############################
 # Sets manpager to neovim     #
 ###############################
-export MANPAGER="nvim -c 'set ft=man' -"
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
 ###############################
 # Prompt                      #
 ##############################
-PS1="%F{red}%n@%m%F{4}%F{#818bec}%~%F{null}%% "
-export PATH=/home/james/.local/bin:$PATH
+
+PS1="%F{red}%B%n@%m%F{4}%~%F{null}%% "
+
 ##############################
 # Commands                   #
 ##############################
@@ -48,17 +55,21 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 ### Fix slowness of pastes
 
 #source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#929293,bold,underline"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=245,normal"
 #export ZSH=$HOME/.oh-my-zsh
 #source $ZSH/oh-my-zsh.sh
-
+setopt correct
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=34}:${(s.:.)LS_COLORS}")';
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
 
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
-
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
 function reddit {
 if [  -z $1 ];
 then
@@ -83,6 +94,10 @@ while :; do
         printf "\r"
     done
     done
+}
+cursedcat() {
+setsid aplay ~/Music/banger.wav d > /dev/null 2>&1
+cat $*
 }
 function rndo {
 return $(printf "%7d" $RANDOM)
@@ -140,14 +155,17 @@ fuck=$(curl -sH "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 
 printf "$(( fuck/1000 ))MB\n"
 
 }
+function pettyedit {
+nvim ~/code/node-site/$1 &&
+scp ~/code/node-site/$1 scp://james@server//home/james/node-site/$1
+}
 # add alias
 function aa {
 echo "alias $1=\"$2\"" >> ~/code/scripts/alias.sh
 }
 # Add -H for curl
 function btc {
-    x= curl -s https://api.coindesk.com/v1/bpi/currentprice.json | jq '.bpi.USD.rate' | sed -e s/\"//g
-    printf "$x"
+curl -s https://api.coindesk.com/v1/bpi/currentprice.json | jq '.bpi.USD.rate' | sed -e 's/"//g'
 }
 function search {
 grep -rnw './' -e "$1" --exclude-dir=node_modules --exclude-dir=.git
@@ -196,5 +214,5 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
-
+export PYTHONSTARTUP=~/.pyrc
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
