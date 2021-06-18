@@ -130,6 +130,9 @@ printf "$size\n"
 function wurtz {
     mpv --vo=tct https://billwurtz.com/"$1".mp3
 }
+wurtz-wave() {
+ mpv --speed=0.84  --audio-display=no --no-audio-pitch-correction "https://billwurtz.com/$1.mp3"
+}
 function cpp {
 g++ -o "code/cpp/out/$2.out" "code/cpp/$1.cpp"
 ./code/cpp/out/"$2"
